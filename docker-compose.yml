@@ -6,6 +6,7 @@ services:
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--default-authentication-plugin=mysql_native_password']
     restart: always
     environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=opencart
       - MYSQL_USER=opencart
       - MYSQL_PASSWORD=opencart
