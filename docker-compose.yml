@@ -1,0 +1,34 @@
+version: '2'
+services:
+  mysql:
+    image: 'mysql:8.0'
+    container_name: mysql
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--default-authentication-plugin=mysql_native_password']
+    restart: always
+    environment:
+      - MYSQL_DATABASE=opencart
+      - MYSQL_USER=opencart
+      - MYSQL_PASSWORD=opencart
+    ports:
+      - '3306:3306'
+    volumes: 
+      - 'mysql_data:/var/lib/mysql'
+      
+  opencart:
+    image: 'docker.io/severchyk/opencart:2.3.0.2-centos-7'
+    container_name: opencart
+    restart: always
+    extra_hosts:
+      - "sev-opencart.ddns.net:3.141.67.213"
+    ports:
+      - '80:8080'
+      - '443:8443'
+    depends_on:
+      - mysql
+    volumes: 
+      - 'opencart_data:/var/www/html'
+volumes:
+  mysql_data:
+    driver: local
+  opencart_data:
+    driver: local
