@@ -23,4 +23,3 @@ RUN sed -i -e '/Listen/s/80/8080/' /etc/httpd/conf/httpd.conf; \
 
 EXPOSE 8080 8443
 ENTRYPOINT ["/usr/sbin/httpd","-D","FOREGROUND"]
-##
